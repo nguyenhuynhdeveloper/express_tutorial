@@ -1,7 +1,6 @@
 {
   "name": "express_tutorial",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./index.js",
@@ -21,10 +20,11 @@
   },
   "homepage": "https://github.com/nguyenhuyndeveloper/express_tutorial#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
-  }
+  },
+  "description": ""
 }

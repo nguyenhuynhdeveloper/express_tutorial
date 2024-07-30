@@ -1,37 +1,48 @@
-//// --------Code này của anh and and code ---------
-//  https://www.youtube.com/watch?v=dqe7cqpNrhc&list=PLnt_aPs_Egkm6hrNKA9IEMyfu5rLju6iz&index=14
-// Đây chính là 1 server backend - code bằng nodeJs sử dụng express là framework
+// Code theo Chat GPT 
 
-// Để chạy server lên npm start
+// Để chạy server lên 
+// npm start  
+// node index.js
 
-const express = require('express')   // yêu cầu express
-const app = express()   // express này chính là 1 function 
-const port = 3000  // ở cổng localhost 3000 127.0.0.1  :   http://localhost:3000
+const express = require('express');
+const app = express();
+const port = 3000;
 
-app.listen(port, () => {        // Phải luôn có cái này : lắng nghe tại cổng 3000
-  console.log(`Example app listening on port ${port}`)
-})
+// Middleware để xử lý JSON
+app.use(express.json());
 
-app.get('/', (req, res, next) => {    // Khi load trang web lên chính là gọi tới / và lấy kết quả trả về--- không viết cũng hiểu là sâu /
-res.status(200).send({ user: [
-  {id: 1 , name : 'van a' , age: 12}, 
-  {id: 2, name: 'thi b', age: 13}
-]});
+// Endpoint GET
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
+// Endpoint POST
+app.post('/data', (req, res) => {
+  const data = req.body;
+  res.send(`You sent: ${JSON.stringify(data)}`);
+});
+
+// Endpoint GET với tham số URL
+app.get('/user/:id', (req, res) => {
+  const userId = req.params.id;
+  res.send(`User ID: ${userId}`);
+});
+
+// Bắt đầu server
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
 
 
-app.get('/:id', (req, res, next) => {
-  res.status(200).send({data: `This is the body of ${req.params.id}`})
-  console.log("REQ With  ID : " , req.params.id );
+
+// Middleware để log các yêu cầu
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
 });
 
-app.post('/', (req, res, next ) => {
-  console.log("REQ:", req.body);
-  res.status(200).send({...req.body, created_at: new Date()})
-})
-
-app.post('/query', (req, res, next) => {
-  res.status(200).send({...req.query, created_at: new Date()})
-  console.log("QUERY: ", req.query)
-})
-
+// Middleware để xử lý lỗi
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
