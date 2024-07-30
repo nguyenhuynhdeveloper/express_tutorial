@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/nguyenhuyndeveloper/express_tutorial#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
